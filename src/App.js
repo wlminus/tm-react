@@ -1,7 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import { useState } from 'react';
 
 function App() {
+
+  const [cusList, setCustomerList] = useState(null);
+
+  const loadCustomer = () => {
+    axios.get("http://localhost:8080/customers").then(ret => {
+      console.log(ret);
+      setCustomerList(ret.data);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +23,13 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h2>Hello world</h2>
+        <button onClick={loadCustomer}>Load Customer</button>
+        {cusList && cusList.map(m => (
+          <div>
+              <h2>{m.id}</h2> - <span>{m.name}</span> ---- <b>{m.address}</b>  
+          </div>
+        ))}
       </header>
     </div>
   );
