@@ -27,7 +27,7 @@ function App() {
         <button onClick={loadCustomer}>Load Customer</button>
         {cusList && cusList.map(m => (
           <div>
-              <h2>{m.id}</h2> - <span>{m.name}</span> ---- <b>{m.address}</b>  
+            <h2>{m.id}</h2> - <span>{m.name}</span> ---- <b>{m.address}</b>
           </div>
         ))}
       </header>
